@@ -1,0 +1,59 @@
+- name: Install Apache
+  yum:
+    name: 'httpd'
+    state: present
+
+- name: Start the Apache service and ensure it is started at boot
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Enable Apache module 'Macro'
+  apache2_module:
+    name: 'macro'
+    state: present
+  notify:
+    - Restart apache2 service
+
+- name: Enable Apache module 'SSL'
+  apache2_module:
+    name: 'ssl'
+    state: present
+  notify:
+    - Restart apache2 service
+
+- name: Enable Apache module 'Expires'
+  apache2_module:
+    name: 'expires'
+    state: present
+  notify:
+    - Restart apache2 service
+
+- name: Enable Apache module 'Rewrite'
+  apache2_module:
+    name: 'rewrite'
+    state: present
+  notify:
+    - Restart apache2 service
+
+- name: Enable Apache module 'Headers'
+  apache2_module:
+    name: 'headers'
+    state: present
+  notify:
+    - Restart apache2 service
+
+- name: Enable Apache module 'Proxy'
+  apache2_module:
+    name: 'proxy'
+    state: present
+  notify:
+    - Restart apache2 service
+
+- name: Enable Apache module 'Proxy HTTP'
+  apache2_module:
+    name: 'proxy_http'
+    state: present
+  notify:
+    - Restart apache2 service

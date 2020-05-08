@@ -1,0 +1,35 @@
+- name: Upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install chrony
+  yum:
+    name: chrony
+    state: present
+  notify:
+    - Restart chronyd service
+
+- name: Start the chronyd service and ensure it is started at boot
+  systemd:
+    name: chronyd
+    state: started
+    enabled: yes
+
+- name: Start the cron service and ensure it is started at boot
+  systemd:
+    name: cron
+    state: started
+    enabled: yes
+
+- name: Set timezone to UTC
+  timezone:
+    name: Etc/UTC
+
+- name: Ensure the en_GB locale exists
+  locale_gen:
+    name: en_GB.UTF-8
+    state: present
+
+- name: Set en_GB as default locale
+  command: update-locale LANG=en_GB.UTF-8 LC_ALL=en_GB.UTF-8

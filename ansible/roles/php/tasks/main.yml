@@ -1,0 +1,11 @@
+- name: Install php
+  yum:
+    name:
+        - php
+        - php-common
+        - php-cli
+        - php-gd
+        - php-pdo
+        - php-xml
+        - php-xmlrpc
+    state: present

@@ -1,0 +1,10 @@
+- hosts: "{{ environment_target }}"
+  name: Setup and configure developer server
+  become: true
+  remote_user: "{{ remote_user }}"
+  vars_files:
+    - "../group_vars/{{ environment_target }}.yml"
+  roles:
+    - common
+    - php
+    - apache
